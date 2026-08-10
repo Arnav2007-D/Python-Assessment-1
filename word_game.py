@@ -1,9 +1,4 @@
-# Name: Arnav Payal
-# Student Number: 10729432
 
-# This file is provided to you as a starting point for the "word_game.py" program of the Assignment
-# of Programming Principles in Semester 2, 2026.  It provides you with suitable lists of words for the game.
-# Use this file as the basis of your work.  You are not required to reference it.
 
 # Import the random module to allow us to select the word list and password at random.
 import random
@@ -54,7 +49,6 @@ for char in difficulty:
     print(f"\n{diff} diffuclty selected!")
     print(f"\nYou have {gueses} guesses to identify the password out of {options} words.")
     print(f"\nIn this difficulty, the game uses {word_len} letter words.")
-    print("\nThe Password is one of these words: ")
 
     pick = random.sample(sample, options)
     
@@ -62,24 +56,39 @@ for char in difficulty:
     answer = random.choice(pick)
 
     while True:
-        
+        #DISPLAY THE PASSWORD OPTIONS WITH THEIR  INDEX
         print("\nTHE PASSWORD IS ONE OF THESE WORDS: ")
-        print(pick)
+        for i, word in enumerate(pick, 1):
+                print(i, word)
+    
+        
         print(f"\nguesses remaining: {gueses}") 
 
-        ask = input("ENTER YOUR CHOICE: ").upper()
+        ask = input("ENTER YOUR CHOICE: ")
 
-        if ask not in pick:
-            print("Pick from the options given")
-        elif ask == answer:
-            print(f"YOU GUESSED THE WORD NICE, THE WORD WAS {answer}")
-            break
+        #Check for valid input and valid range 
+        if ask.isdigit():
+            if int(ask) >= 1 and int(ask) <= options:
+                guess_word = pick[int(ask) - 1]
+
+            else:
+                print("Pick a number from the options given!")
 
         else:
-            print("GUESS INCORRECT")
+            print("INVALID INPUT!!")
+        
+
+        # Check if user won the game
+        if guess_word == answer:
+            print(f"YOU WON!!, THE WORD WAS {answer}")
+            break
+
+        #Continue the game, until user loses or wins
+        else:
+            print(f"YOU PICKED {guess_word}, GUESS INCORRECT!!")       
             count = 0
             for char in answer:
-                if char in ask:
+                if char in guess_word:
                     count += 1
 
             print(f"\n{count} / {word_len} letters correct")
@@ -135,7 +144,6 @@ for char in difficulty:
 
 
     
-
 
 
 
