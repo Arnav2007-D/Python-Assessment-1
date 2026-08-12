@@ -12,112 +12,119 @@ hard_words = ['ABRIDGED', 'ABSOLVED', 'ABSORBED', 'ACCEPTED', 'ACQUIRED', 'ADMIT
 print("Welcome to Password Guesser Deluxe! \nBY ARNAV PAYAL (10729432)")
 
 # INPUT DIFF
-difficulty = input('Choose your diffuclty [E]asy, [M]edium, [H]ard:  ').upper()
-
-#Check if input is valid
-if difficulty.isdigit(): 
-    print("Invalid choice! Enter  E, M or H")
-elif difficulty not in ["E", "M", "H"] :
-    print("Invalid choice! Enter  E, M or H")
-
-
-    #EASY DIFF DESCRIPTION
-if difficulty == "E":
-        diff = "Easy"
-        gueses = 5 
-        options = 7
-        word_len = 6 
-        sample = easy_words
-
-    #MED DIFF DESCRIPTION
-elif difficulty == "M":
-        diff = "Medium"
-        gueses = 4 
-        options = 8
-        word_len = 7
-        sample = medium_words
-        
-        
-    #Hard DIFF DESCRIPTION
-elif difficulty == "H":
-        diff = "Hard"
-        gueses = 4
-        options = 9
-        word_len = 8
-        sample = hard_words
-
-
-    #DISPLAY INFO ABOUT THE DIFF
-print(f"\n{diff} diffuclty selected!")
-print(f"\nYou have {gueses} guesses to identify the password out of {options} words.")
-print(f"\nIn this difficulty, the game uses {word_len} letter words.")
-
-    #GENERATE RANDOM WORDS
-pick = random.sample(sample, options)
-    
-    #Answer
-answer = random.choice(pick)
 
 while True:
-        #DISPLAY THE PASSWORD OPTIONS WITH THEIR INDEX
-        print("\nTHE PASSWORD IS ONE OF THESE WORDS: ")
-        for i, word in enumerate(pick, 1):  
-                print(i, word)              #Print words
-    
-        
-        print(f"\nguesses remaining: {gueses}") 
+    ask_enter = input("Press Enter to start!: ")
+    if ask_enter == "":
+        while True: 
+            difficulty = input('Choose your diffuclty [E]asy, [M]edium, [H]ard:  ').upper()
+            #EASY DIFF DESCRIPTION
+            if difficulty == "E":
+                    diff = "Easy"
+                    gueses = 5 
+                    options = 7
+                    word_len = 6 
+                    sample = easy_words
 
-        ask = input("ENTER YOUR CHOICE: ")
-
-        #Check for valid input and valid range 
-        if ask.isdigit():
-            if int(ask) >= 1 and int(ask) <= options:
-                guess_word = pick[int(ask) - 1]
+            #MED DIFF DESCRIPTION
+            elif difficulty == "M":
+                    diff = "Medium"
+                    gueses = 4 
+                    options = 8
+                    word_len = 7
+                    sample = medium_words
+                    
+                    
+            #Hard DIFF DESCRIPTION
+            elif difficulty == "H":
+                    diff = "Hard"
+                    gueses = 4
+                    options = 9
+                    word_len = 8
+                    sample = hard_words
 
             else:
-                print("Pick a number from the options given!")
+                print("\nINVALID INPUT")
+                continue
+                
+            
+            
+            #DISPLAY INFO ABOUT THE DIFF
+            print(f"\n{diff} diffuclty selected!")
+            print(f"\nYou have {gueses} guesses to identify the passw ord out of {options} words.")
+            print(f"\nIn this difficulty, the game uses {word_len} letter words.")
 
-        else:
-            print("INVALID INPUT!!")
+            #GENERATE RANDOM WORDS
+            pick = random.sample(sample, options)
+                
+            #Answer
+            answer = random.choice(pick)
+
+            while True:
+                    #DISPLAY THE PASSWORD OPTIONS WITH THEIR INDEX
+                    print("\nTHE PASSWORD IS ONE OF THESE WORDS: ")
+                    for i, word in enumerate(pick, 1):  
+                            print(i, ')', word)             #Print words
+                
+                    
+                    print(f"\nguesses remaining: {gueses}") 
+
+                    ask = input("ENTER YOUR CHOICE: ")
+
+                    #Check for valid input and valid range 
+                    if ask.isdigit():
+                        if int(ask) >= 1 and int(ask) <= options:
+                            guess_word = pick[int(ask) - 1]
+
+                        else:
+                            print("\nPick a number from the options given!")
+                            continue
+                            
+                    else:
+                        print("\nINVALID INPUT!!")
+                        continue
+                    
+
+                    # Check if user won the game
+                    if guess_word == answer:
+                        print(f"YOU WON!!, THE WORD WAS {answer}")
+                        break
+
+                    #Continue the game, until user loses or wins
+                    else:
+                        print(f"YOU PICKED {guess_word}, GUESS INCORRECT!!")       
+                        count = 0
+                        for char in answer:
+                            if char in guess_word:
+                                count += 1
+
+                        print(f"\n{count} / {word_len} letters correct")
+
+                        gueses = gueses - 1
+                        if gueses == 0:
+                            print(f"YOU LOST, THE WORD WAS {answer}")
+                            game_end = True
+                            break
+    
+    elif ask_enter != "":
+             print("\nINVALID INPUT!!")
+             continue                       
+                
+
+            
+
         
 
-        # Check if user won the game
-        if guess_word == answer:
-            print(f"YOU WON!!, THE WORD WAS {answer}")
-            break
+        
+        
 
-        #Continue the game, until user loses or wins
-        else:
-            print(f"YOU PICKED {guess_word}, GUESS INCORRECT!!")       
-            count = 0
-            for char in answer:
-                if char in guess_word:
-                    count += 1
 
-            print(f"\n{count} / {word_len} letters correct")
 
-            gueses = gueses - 1
-            if gueses == 0:
-                print(f"YOU LOST, THE WORD WAS {answer}")
-                break
 
 
 
         
 
-    
-
-    
-
-    
-    
-
-
-
-
-
-
-    
 
 
 
@@ -126,27 +133,26 @@ while True:
 
 
 
-
-    
-
-
-
-
-
-    
-    
+        
 
 
 
 
 
-    
+        
+        
 
 
-    
 
 
-    
+
+        
+
+
+        
+
+
+        
 
 
 
