@@ -11,25 +11,26 @@ hard_words = ['ABRIDGED', 'ABSOLVED', 'ABSORBED', 'ACCEPTED', 'ACQUIRED', 'ADMIT
 
 print("Welcome to Password Guesser Deluxe! \nBY ARNAV PAYAL (10729432)")
 
+# INPUT DIFF
 difficulty = input('Choose your diffuclty [E]asy, [M]edium, [H]ard:  ').upper()
 
-# CHOOSE DIFF
-if difficulty not in ["E", "M", "H"]:
+#Check if input is valid
+if difficulty.isdigit(): 
+    print("Invalid choice! Enter  E, M or H")
+elif difficulty not in ["E", "M", "H"] :
     print("Invalid choice! Enter  E, M or H")
 
-#DIFF DESCRIPTION
-for char in difficulty:
 
     #EASY DIFF DESCRIPTION
-    if difficulty == "E":
+if difficulty == "E":
         diff = "Easy"
         gueses = 5 
         options = 7
         word_len = 6 
         sample = easy_words
 
-#MED DIFF DESCRIPTION
-    elif difficulty == "M":
+    #MED DIFF DESCRIPTION
+elif difficulty == "M":
         diff = "Medium"
         gueses = 4 
         options = 8
@@ -37,29 +38,31 @@ for char in difficulty:
         sample = medium_words
         
         
-#Hard DIFF DESCRIPTION
-    elif difficulty == "H":
+    #Hard DIFF DESCRIPTION
+elif difficulty == "H":
         diff = "Hard"
         gueses = 4
         options = 9
         word_len = 8
         sample = hard_words
 
+
     #DISPLAY INFO ABOUT THE DIFF
-    print(f"\n{diff} diffuclty selected!")
-    print(f"\nYou have {gueses} guesses to identify the password out of {options} words.")
-    print(f"\nIn this difficulty, the game uses {word_len} letter words.")
+print(f"\n{diff} diffuclty selected!")
+print(f"\nYou have {gueses} guesses to identify the password out of {options} words.")
+print(f"\nIn this difficulty, the game uses {word_len} letter words.")
 
-    pick = random.sample(sample, options)
+    #GENERATE RANDOM WORDS
+pick = random.sample(sample, options)
     
+    #Answer
+answer = random.choice(pick)
 
-    answer = random.choice(pick)
-
-    while True:
-        #DISPLAY THE PASSWORD OPTIONS WITH THEIR  INDEX
+while True:
+        #DISPLAY THE PASSWORD OPTIONS WITH THEIR INDEX
         print("\nTHE PASSWORD IS ONE OF THESE WORDS: ")
-        for i, word in enumerate(pick, 1):
-                print(i, word)
+        for i, word in enumerate(pick, 1):  
+                print(i, word)              #Print words
     
         
         print(f"\nguesses remaining: {gueses}") 
