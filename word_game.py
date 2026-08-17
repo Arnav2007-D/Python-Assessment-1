@@ -12,14 +12,21 @@ hard_words = ['ABRIDGED', 'ABSOLVED', 'ABSORBED', 'ACCEPTED', 'ACQUIRED', 'ADMIT
 print("Welcome to Password Guesser Deluxe! \nBY ARNAV PAYAL (10729432)")
 
 # INPUT DIFF
+game_end = False
 
 while True:
+    if game_end:
+         break
+    
     ask_enter = input("Press Enter to start!: ")
     if ask_enter == "":
         while True: 
+            if game_end:
+                break
+            
             difficulty = input('Choose your diffuclty [E]asy, [M]edium, [H]ard:  ').upper()
             #EASY DIFF DESCRIPTION
-            if difficulty == "E":
+            if difficulty == "E" or difficulty == "EASY":
                     diff = "Easy"
                     gueses = 5 
                     options = 7
@@ -27,7 +34,7 @@ while True:
                     sample = easy_words
 
             #MED DIFF DESCRIPTION
-            elif difficulty == "M":
+            elif difficulty == "M" or difficulty == "MEDIUM":
                     diff = "Medium"
                     gueses = 4 
                     options = 8
@@ -36,7 +43,7 @@ while True:
                     
                     
             #Hard DIFF DESCRIPTION
-            elif difficulty == "H":
+            elif difficulty == "H" or difficulty == "HARD":
                     diff = "Hard"
                     gueses = 4
                     options = 9
@@ -60,7 +67,11 @@ while True:
             #Answer
             answer = random.choice(pick)
 
+            duplicate_answer = []
             while True:
+                    if game_end:
+                         break
+                    
                     #DISPLAY THE PASSWORD OPTIONS WITH THEIR INDEX
                     print("\nTHE PASSWORD IS ONE OF THESE WORDS: ")
                     for i, word in enumerate(pick, 1):  
@@ -75,6 +86,9 @@ while True:
                     if ask.isdigit():
                         if int(ask) >= 1 and int(ask) <= options:
                             guess_word = pick[int(ask) - 1]
+                            if guess_word in duplicate_answer:
+                                print("\nYOU ALREADY PICKED THIS OPTION")
+                                continue
 
                         else:
                             print("\nPick a number from the options given!")
@@ -88,10 +102,23 @@ while True:
                     # Check if user won the game
                     if guess_word == answer:
                         print(f"YOU WON!!, THE WORD WAS {answer}")
-                        break
+                        keep_playing = input("WOULD U LIKE PLAY AGAIN?(yes/no): ").lower() #ASK TO PLAY AGAIN
+
+                        if keep_playing not in ["yes", "no"]:
+                                 print("INVALID OPTION")
+
+
+                        elif keep_playing == "yes":
+                                break
+
+                        elif keep_playing == "no":
+                                 game_end = True
+                                 break                        
 
                     #Continue the game, until user loses or wins
                     else:
+                        duplicate_answer.append(guess_word) 
+                    
                         print(f"YOU PICKED {guess_word}, GUESS INCORRECT!!")       
                         count = 0
                         for char in answer:
@@ -100,12 +127,26 @@ while True:
 
                         print(f"\n{count} / {word_len} letters correct")
 
+
                         gueses = gueses - 1
                         if gueses == 0:
                             print(f"YOU LOST, THE WORD WAS {answer}")
-                            game_end = True
-                            break
-    
+                            keep_playing = input("WOULD U LIKE PLAY AGAIN?(yes/no): ").lower() #ASK TO PLAY AGAIN
+
+                            if keep_playing not in ["yes", "no"]:
+                                 print("INVALID OPTION")
+
+
+                            elif keep_playing == "yes":
+                                break
+
+                            elif keep_playing == "no":
+                                 game_end = True
+                                 break
+                                
+                                 
+
+
     elif ask_enter != "":
              print("\nINVALID INPUT!!")
              continue                       
