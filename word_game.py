@@ -58,7 +58,7 @@ while True:
             
             #DISPLAY INFO ABOUT THE DIFF
             print(f"\n{diff} diffuclty selected!")
-            print(f"\nYou have {gueses} guesses to identify the passw ord out of {options} words.")
+            print(f"\nYou have {gueses} guesses to identify the password out of {options} words.")
             print(f"\nIn this difficulty, the game uses {word_len} letter words.")
 
             #GENERATE RANDOM WORDS
@@ -67,7 +67,7 @@ while True:
             #Answer
             answer = random.choice(pick)
 
-            duplicate_answer = []
+            duplicate_answer = [] #variable for duplicate answers
             while True:
                     if game_end:
                          break
@@ -89,6 +89,7 @@ while True:
                             if guess_word in duplicate_answer:
                                 print("\nYOU ALREADY PICKED THIS OPTION")
                                 continue
+                            
 
                         else:
                             print("\nPick a number from the options given!")
@@ -117,7 +118,7 @@ while True:
 
                     #Continue the game, until user loses or wins
                     else:
-                        duplicate_answer.append(guess_word) 
+                        duplicate_answer.append(guess_word) #Check for duplicate answers
                     
                         print(f"YOU PICKED {guess_word}, GUESS INCORRECT!!")       
                         count = 0
